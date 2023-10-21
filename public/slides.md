@@ -11,7 +11,7 @@
   - allowing multiple values to be emitted over time
 
 <p style="text-align: center">
-  <img src="../public/favicon.ico" alt="ReactiveX" height="150" />
+  <img src="./public/favicon.ico" alt="ReactiveX" height="150" />
 </p>
 
 Notes :
