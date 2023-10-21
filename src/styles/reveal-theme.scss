@@ -1,0 +1,21 @@
+/**
+ * Copy/paste from: "../../node_modules/reveal.js/css/theme/source/*.scss"
+ */
+
+// Default mixins and settings
+@import "../../node_modules/reveal.js/css/theme/template/mixins";
+@import "../../node_modules/reveal.js/css/theme/template/settings";
+
+// Include theme-specific fonts
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap');
+
+// Override theme settings (see ../template/settings.scss)
+@import "./reveal-settings.scss";
+
+// Change text colors against dark slide backgrounds
+@include dark-bg-text-color(#fff);
+
+// Theme template
+@import "../../node_modules/reveal.js/css/theme/template/theme";

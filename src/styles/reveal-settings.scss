@@ -1,0 +1,36 @@
+// Background of the presentation
+$backgroundColor: #ffffff;
+
+// Primary/body text
+$mainFont: 'Open Sans', sans-serif;
+$mainFontSize: 36px;
+$mainColor: #001253;
+
+// Vertical spacing between blocks of text
+$blockMargin: 36px;
+
+// Headings
+$headingMargin: 0 0 $blockMargin 0;
+$headingFont: 'Courgette', cursive;
+$headingColor: #E14D2A;
+$headingLineHeight: 1.2;
+$headingLetterSpacing: normal;
+$headingTextTransform: none;
+$headingTextShadow: none;
+$headingFontWeight: normal;
+$heading1TextShadow: $headingTextShadow;
+
+$heading1Size: 3.77em;
+$heading2Size: 2.11em;
+$heading3Size: 1.55em;
+$heading4Size: 1.00em;
+
+$codeFont: 'Fira Mono', monospace;
+
+// Links and actions
+$linkColor: #FD841F;
+$linkColorHover: lighten( $linkColor, 20% );
+
+// Text selection
+$selectionBackgroundColor: #E14D2A;
+$selectionColor: #fff;

@@ -1,13 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <title>You don't know RxJS (me neither)</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
+    <div class="reveal">
+      <div class="slides">
+        <section class="center" style="text-align: center">
+          <h1>You don't know RxJS</h1>
+
+          <h2>(me neither)</h2>
+        </section>
+
+        <section
+          data-markdown="./src/slides.md"
+          data-separator="^\n\n\n"
+          data-separator-vertical="^\n\n"
+          data-separator-notes="^Notes :"
+          data-charset="UTF-8"
+        ></section>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
