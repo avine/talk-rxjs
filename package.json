@@ -7,7 +7,8 @@
     "postinstall": "cp ./node_modules/reveal.js-copycode/plugin/copycode/copycode.css ./public",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "docs": "vite build --base /talk-rxjs --out-dir docs"
   },
   "dependencies": {
     "highlight.js": "^11.9.0",
