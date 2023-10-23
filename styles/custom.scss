@@ -53,9 +53,11 @@
   }
 
   pre {
+    box-shadow: none;
     border-radius: 0.25em;
+    border: 1px solid rgba(160 160 160 / 0.5);
     font-size: 0.8em;
-    
+  
     code {
       border-radius: inherit;
       max-height: none;
