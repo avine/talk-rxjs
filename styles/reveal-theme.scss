@@ -7,9 +7,11 @@
 @import "../node_modules/reveal.js/css/theme/template/settings";
 
 // Include theme-specific fonts
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap');
+@import "../node_modules/@fontsource/open-sans/400.css";
+@import "../node_modules/@fontsource/open-sans/600.css";
+@import "../node_modules/@fontsource/courgette/400.css";
+@import "../node_modules/@fontsource/fira-mono/400.css";
+@import "../node_modules/@fontsource/fira-mono/500.css";
 
 // Override theme settings (see ../template/settings.scss)
 @import "./reveal-settings.scss";

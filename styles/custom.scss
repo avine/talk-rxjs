@@ -1,10 +1,8 @@
 @import "./reveal-settings.scss";
 
-$custom-codeColor: #c18401;
-
 .reveal {
   h2 {
-    margin-bottom: $blockMargin * 1.5;
+    margin-bottom: calc(var(--r-block-margin) * 1.5);
   }
 
   ul,
@@ -18,10 +16,10 @@ $custom-codeColor: #c18401;
   ol ol {
     margin: var(--r-block-margin) 0 0 var(--r-block-margin);
   }
-  
+
   li {
     &::marker {
-      color: #fd841f;
+      color: var(--r-link-color);
     }
 
     + li {
@@ -51,19 +49,16 @@ $custom-codeColor: #c18401;
   }
 
   code:not(.hljs) {
-    color: $custom-codeColor;
-  }  
+    font-weight: 500;
+  }
 
   pre {
-    border-radius: 4px;
-    box-shadow: none;
-    border: 1px solid #{rgba($mainColor, 0.5)};
-    border-left: 2px solid $headingColor;
+    border-radius: 0.25em;
     font-size: 0.8em;
-  
+    
     code {
+      border-radius: inherit;
       max-height: none;
-      background: none;
     }
   }
 }
@@ -71,7 +66,7 @@ $custom-codeColor: #c18401;
 // ---------------------------------------------------------------------
 // Use the following to align the slides to the left
 // Additionally, use the config: `Reveal.initialize({ center: false });`
-.reveal {
+/*.reveal {
   section {
     text-align: left;
   }
@@ -79,5 +74,5 @@ $custom-codeColor: #c18401;
   pre {
     width: auto;
   }
-}
+}*/
 // ---------------------------------------------------------------------

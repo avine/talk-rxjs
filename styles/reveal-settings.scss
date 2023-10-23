@@ -2,7 +2,7 @@
 $backgroundColor: #ffffff;
 
 // Primary/body text
-$mainFont: 'Open Sans', sans-serif;
+$mainFont: "Open Sans", sans-serif;
 $mainFontSize: 36px;
 $mainColor: #001253;
 
@@ -11,8 +11,8 @@ $blockMargin: 36px;
 
 // Headings
 $headingMargin: 0 0 $blockMargin 0;
-$headingFont: 'Courgette', cursive;
-$headingColor: #E14D2A;
+$headingFont: "Courgette", cursive;
+$headingColor: #e14d2a;
 $headingLineHeight: 1.2;
 $headingLetterSpacing: normal;
 $headingTextTransform: none;
@@ -23,14 +23,14 @@ $heading1TextShadow: $headingTextShadow;
 $heading1Size: 3.77em;
 $heading2Size: 2.11em;
 $heading3Size: 1.55em;
-$heading4Size: 1.00em;
+$heading4Size: 1em;
 
-$codeFont: 'Fira Mono', monospace;
+$codeFont: "Fira Mono", monospace;
 
 // Links and actions
-$linkColor: #FD841F;
-$linkColorHover: lighten( $linkColor, 20% );
+$linkColor: #fd841f;
+$linkColorHover: lighten($linkColor, 20%);
 
 // Text selection
-$selectionBackgroundColor: #E14D2A;
+$selectionBackgroundColor: #e14d2a;
 $selectionColor: #fff;

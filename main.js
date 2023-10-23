@@ -7,6 +7,9 @@ import "./styles/reveal-theme.scss";
 // Highlight
 import "./node_modules/highlight.js/styles/atom-one-light.css";
 
+// CopyCode
+import "./plugins/copy-code/copy-code.scss";
+
 // Custom
 import "./styles/custom.scss";
 
@@ -19,7 +22,7 @@ import Reveal from "reveal.js";
 import Markdown from "reveal.js/plugin/markdown/markdown";
 import Highlight from "reveal.js/plugin/highlight/highlight";
 import Notes from "reveal.js/plugin/notes/notes";
-import CopyCode from "reveal.js-copycode/plugin/copycode/copycode";
+import CopyCode from "./plugins/copy-code/copy-code";
 
 Reveal.initialize({
   hash: true,
@@ -31,19 +34,4 @@ Reveal.initialize({
   maxScale: 2.0,
   center: false,
   plugins: [Markdown, Highlight, Notes, CopyCode],
-
-  copycode: {
-    display: "icons", // "text"|"icons"|"both"
-    style: {
-      copybg: "#ddd",
-      copiedbg: "#eee",
-      copycolor: "#333",
-      copiedcolor: "#333",
-      copyborder: "1px solid #bbb", // e.g. "1px solid blue"
-      copiedborder: "",
-      scale: 1.25,
-      offset: 0.25, // in em units
-      radius: 0.25, // in em units
-    },
-  },
 });

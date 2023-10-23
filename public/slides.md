@@ -1,6 +1,6 @@
 ## RxJS
 
-- Refers to a paradigm called ReactiveX (http://reactivex.io/)
+- Refers to a __paradigm__ called ReactiveX (http://reactivex.io/)
   - an API for asynchronous programming with observable streams
   - implemented in all major programming languages: RxJava, Rx.NET, ...
 

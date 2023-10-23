@@ -4,16 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "postinstall": "cp ./node_modules/reveal.js-copycode/plugin/copycode/copycode.css ./public",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "docs": "vite build --base /talk-rxjs --out-dir docs"
   },
   "dependencies": {
+    "@fontsource/courgette": "^5.0.17",
+    "@fontsource/fira-mono": "^5.0.8",
+    "@fontsource/open-sans": "^5.0.17",
     "highlight.js": "^11.9.0",
-    "reveal.js": "^4.6.1",
-    "reveal.js-copycode": "^1.1.2"
+    "reveal.js": "^4.6.1"
   },
   "devDependencies": {
     "sass": "^1.69.4",
