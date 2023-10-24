@@ -14,6 +14,7 @@ export default () => ({
       let timeout;
       button.addEventListener("click", () => {
         callback?.();
+        clearTimeout(timeout);
         button.classList.add("copy-code--active");
         timeout = setTimeout(
           () => button.classList.remove("copy-code--active"),
