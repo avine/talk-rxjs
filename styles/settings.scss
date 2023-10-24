@@ -1,10 +1,6 @@
-// Background of the presentation
-$backgroundColor: #ffffff;
-
 // Primary/body text
 $mainFont: "Open Sans", sans-serif;
 $mainFontSize: 36px;
-$mainColor: #001253;
 
 // Vertical spacing between blocks of text
 $blockMargin: 36px;
@@ -12,7 +8,6 @@ $blockMargin: 36px;
 // Headings
 $headingMargin: 0 0 $blockMargin 0;
 $headingFont: "Courgette", cursive;
-$headingColor: #e14d2a;
 $headingLineHeight: 1.2;
 $headingLetterSpacing: normal;
 $headingTextTransform: none;
@@ -26,11 +21,3 @@ $heading3Size: 1.55em;
 $heading4Size: 1em;
 
 $codeFont: "Fira Mono", monospace;
-
-// Links and actions
-$linkColor: #fd841f;
-$linkColorHover: lighten($linkColor, 20%);
-
-// Text selection
-$selectionBackgroundColor: #e14d2a;
-$selectionColor: #fff;

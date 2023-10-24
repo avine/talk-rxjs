@@ -14,10 +14,8 @@
 @import "../node_modules/@fontsource/fira-mono/500.css";
 
 // Override theme settings (see ../template/settings.scss)
-@import "./reveal-settings.scss";
-
-// Change text colors against dark slide backgrounds
-@include dark-bg-text-color(#fff);
+@import "./settings.scss";
+@import "./colors-light.scss"; // Choose between "colors-light.scss" and "./colors-dark.scss"
 
 // Theme template
 @import "../node_modules/reveal.js/css/theme/template/theme";

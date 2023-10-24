@@ -2,7 +2,7 @@
 
 // Reveal
 import "./node_modules/reveal.js/dist/reveal.css";
-import "./styles/reveal-theme.scss";
+import "./styles/theme.scss";
 
 // Highlight
 import "./node_modules/highlight.js/styles/atom-one-light.css";

@@ -1,0 +1,19 @@
+// Background of the presentation
+$backgroundColor: #ffffff;
+
+// Primary/body text
+$mainColor: #001253;
+
+// Headings
+$headingColor: #e14d2a;
+
+// Links and actions
+$linkColor: #fd841f;
+$linkColorHover: lighten($linkColor, 20%);
+
+// Text selection
+$selectionBackgroundColor: #e14d2a;
+$selectionColor: #ffffff;
+
+// Change text colors against dark slide backgrounds
+@include dark-bg-text-color(#ffffff);

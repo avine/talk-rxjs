@@ -40,7 +40,7 @@ Everything is summarized in the slide "RxJS - Summary so far"...
 
 
 
-## RxJS - Observable & Observer
+## Observable & Observer
 
 ```ts [1|3-7|9-12|14]
 import { Observable, Observer } from 'rxjs';
@@ -73,7 +73,7 @@ Notes :
 
 
 
-## RxJS - Observable & Observer
+## Observable & Observer
 
 ```ts
 import { Observable, Observer } from 'rxjs';
@@ -98,7 +98,7 @@ Notes :
 
 
 
-## RxJS - Observable & Observer
+## Observable & Observer
 
 ```ts
 import { Observable, Observer } from 'rxjs';
@@ -123,7 +123,7 @@ data$.subscribe(next);                            // <-- same as `data$.subscrib
 
 
 
-## RxJS - Subscription 1/3
+## Subscription 1/3
 
 - Example of an observable that completes itself properly (without memory leak)
 
@@ -153,7 +153,7 @@ Notes :
 
 
 
-## RxJS - Subscription 2/3
+## Subscription 2/3
 
 - Example of an observable that never completes and have a *memory leak*!
 
@@ -184,7 +184,7 @@ Notes :
 
 
 
-## RxJS - Subscription 3/3
+## Subscription 3/3
 
 - Example of an observable that never completes but cleans up itself properly
 
@@ -220,7 +220,7 @@ Notes :
 
 
 
-## RxJS - Observable source
+## Observable source
 
 - Observable can be created using `of` function:
 
@@ -250,7 +250,7 @@ Notes :
 
 
 
-## RxJS - Observable source
+## Observable source
 
 - Observable can be created using `fromEvent` function:
 
@@ -278,7 +278,7 @@ Notes :
 
 
 
-## RxJS - Operators | synchronous
+## Operators | synchronous
 
 ```ts
 import {
@@ -309,7 +309,7 @@ Notes :
 
 
 
-## RxJS - Operators | asynchronous
+## Operators | asynchronous
 
 ```ts
 import { Observable, concatMap } from 'rxjs'; // <-- "concatMap": asynchronous transformation
@@ -346,7 +346,7 @@ Notes :
 
 
 
-## RxJS - Operators | more...
+## Operators | more...
 
 - `concatMap`<br />
   Projects each source value to an Observable which is merged in the output Observable, in a serialized fashion waiting for each one to complete before merging the next.
@@ -367,7 +367,7 @@ Notes :
 
 
 
-## RxJS - Operators | catchError
+## Operators | catchError
 
 - The `catchError` operator should:
   - return another observable
@@ -396,7 +396,7 @@ Notes :
 
 
 
-## RxJS - Summary so far
+## Summary so far
 
 - By convention, a variable representing an observable ends with the symbol `$`
 
@@ -416,7 +416,7 @@ Notes :
 
 
 
-## RxJS - Subject
+## Subject
 
 - A `Subject` implements both `Observable` and `Observer` interfaces
 
@@ -445,7 +445,7 @@ Notes :
 
 
 
-## RxJS - Subject
+## Subject
 
 - Unlike the observable:
   - a subject implementation lives outside its instantiation (calling `next`, `error`, `complete`)
@@ -473,7 +473,7 @@ Notes :
 
 
 
-## RxJS - Observable compared to Subject
+## Observable compared to Subject
 
 - Unlike the subject:
   - an observable implementation lives inside its instantiation (calling `next`, `error`, `complete`)
@@ -500,7 +500,7 @@ Notes :
 
 
 
-## RxJS - Subject as Observer
+## Subject as Observer
 
 - As an observer, a `Subject` can subscribe to an `Observable`!
 
@@ -531,7 +531,7 @@ Notes :
 
 
 
-## RxJS - Subject | BehaviorSubject
+## Subject | BehaviorSubject
 
 A variant of Subject that requires an initial value and emits its current value whenever it is subscribed to.
 
@@ -560,7 +560,7 @@ Notes :
 
 
 
-## RxJS - Subject | ReplaySubject
+## Subject | ReplaySubject
 
 A variant of Subject that "replays" old values to new subscribers by emitting them when they first subscribe.
 
@@ -588,7 +588,7 @@ Notes :
 
 
 
-## RxJS - Angular state management 1/4
+## Angular state management 1/4
 
 - Expose application data through service facade and observables
 
@@ -618,7 +618,7 @@ Notes :
 
 
 
-## RxJS - Angular state management 2/4
+## Angular state management 2/4
 
 - Same example but using a `ReplaySubject` instead of a `BehaviorSubject`
 
@@ -653,7 +653,7 @@ Notes :
 
 
 
-## RxJS - Angular state management 3/4
+## Angular state management 3/4
 
 - Determine the appropriate place to trigger data fetching
 
@@ -683,7 +683,7 @@ Notes :
 
 
 
-## RxJS - Angular state management 4/4
+## Angular state management 4/4
 
 - Consume the service facade in your components
 
