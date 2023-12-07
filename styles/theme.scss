@@ -7,15 +7,14 @@
 @import "../node_modules/reveal.js/css/theme/template/settings";
 
 // Include theme-specific fonts
-@import "../node_modules/@fontsource/open-sans/400.css";
-@import "../node_modules/@fontsource/open-sans/600.css";
-@import "../node_modules/@fontsource/courgette/400.css";
-@import "../node_modules/@fontsource/fira-mono/400.css";
-@import "../node_modules/@fontsource/fira-mono/500.css";
+@import "../node_modules/@fontsource/nunito/400.css";
+@import "../node_modules/@fontsource/nunito/700.css";
+@import "../node_modules/@fontsource/fira-code/400.css";
+@import "../node_modules/@fontsource/fira-code/500.css";
 
 // Override theme settings (see ../template/settings.scss)
 @import "./settings.scss";
-@import "./colors-light.scss"; // Choose between "colors-light.scss" and "./colors-dark.scss"
+@import "./colors-dark.scss"; // Choose between "colors-light.scss" and "./colors-dark.scss"
 
 // Theme template
 @import "../node_modules/reveal.js/css/theme/template/theme";

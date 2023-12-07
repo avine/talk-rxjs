@@ -2,18 +2,18 @@
 $backgroundColor: #212327;
 
 // Primary/body text
-$mainColor: #efe9e7;
+$mainColor: rgba(255, 255, 255, 0.87);
 
 // Headings
-$headingColor: #fb6376;
+$headingColor: #df2147;
 
 // Links and actions
-$linkColor: #62c370;
+$linkColor: #df2147;
 $linkColorHover: lighten($linkColor, 20%);
 
 // Text selection
-$selectionBackgroundColor: #4056f4;
-$selectionColor: #efe9e7;
+$selectionBackgroundColor: #df2147;
+$selectionColor: rgba(255, 255, 255, 0.87);
 
 // Change text colors against dark slide backgrounds
 @include light-bg-text-color(#212327);

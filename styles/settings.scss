@@ -1,5 +1,5 @@
 // Primary/body text
-$mainFont: "Open Sans", sans-serif;
+$mainFont: "Nunito", sans-serif;
 $mainFontSize: 36px;
 
 // Vertical spacing between blocks of text
@@ -7,12 +7,12 @@ $blockMargin: 36px;
 
 // Headings
 $headingMargin: 0 0 $blockMargin 0;
-$headingFont: "Courgette", cursive;
+$headingFont: $mainFont;
 $headingLineHeight: 1.2;
 $headingLetterSpacing: normal;
 $headingTextTransform: none;
 $headingTextShadow: none;
-$headingFontWeight: normal;
+$headingFontWeight: bold;
 $heading1TextShadow: $headingTextShadow;
 
 $heading1Size: 3.77em;
@@ -20,4 +20,4 @@ $heading2Size: 2.11em;
 $heading3Size: 1.55em;
 $heading4Size: 1em;
 
-$codeFont: "Fira Mono", monospace;
+$codeFont: "Fira Code", monospace;

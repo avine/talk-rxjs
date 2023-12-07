@@ -5,7 +5,7 @@ import "./node_modules/reveal.js/dist/reveal.css";
 import "./styles/theme.scss";
 
 // Highlight
-import "./node_modules/highlight.js/styles/atom-one-light.css";
+import "./node_modules/highlight.js/styles/atom-one-dark.css";
 
 // CopyCode
 import "./plugins/copy-code/copy-code.scss";

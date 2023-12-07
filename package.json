@@ -10,8 +10,8 @@
     "docs": "vite build --base /talk-rxjs --out-dir docs"
   },
   "dependencies": {
-    "@fontsource/courgette": "^5.0.17",
-    "@fontsource/fira-mono": "^5.0.8",
+    "@fontsource/fira-code": "^5.0.16",
+    "@fontsource/nunito": "^5.0.16",
     "@fontsource/open-sans": "^5.0.17",
     "highlight.js": "^11.9.0",
     "reveal.js": "^4.6.1"
