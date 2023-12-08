@@ -35,3 +35,11 @@ Reveal.initialize({
   center: false,
   plugins: [Markdown, Highlight, Notes, CopyCode],
 });
+
+// Trigger Confetti by pressing "c" key
+import confetti from 'canvas-confetti';
+document.addEventListener('keyup', (keyboardEvent) => {
+  if (keyboardEvent.key === 'c') {
+    confetti({ particleCount: 100, spread: 70, origin: { y: 0.65 } });
+  }
+})

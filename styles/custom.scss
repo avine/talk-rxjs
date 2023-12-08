@@ -59,6 +59,7 @@ body {
     border-radius: 0.25em;
     border: 1px solid rgba(160 160 160 / 0.5);
     font-size: 0.8em;
+    line-height: 1.3em;
 
     code {
       border-radius: inherit;
@@ -70,7 +71,7 @@ body {
 // ---------------------------------------------------------------------
 // Use the following to align the slides to the left
 // Additionally, use the config: `Reveal.initialize({ center: false });`
-/*.reveal {
+.reveal {
   section {
     text-align: left;
   }
@@ -78,5 +79,5 @@ body {
   pre {
     width: auto;
   }
-}*/
+}
 // ---------------------------------------------------------------------

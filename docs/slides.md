@@ -1,30 +1,126 @@
+## A long time ago... 1/3
+
+<span class="fragment">
+
+```ts
+let itBe = new AwesomeLibrary<ManipulatingComplexData>().then((justUseMe) => {
+  andDontAskQuestions(justUseMe);
+});
+```
+
+</span>
+
+<span class="fragment">
+
+#### But how `AwesomeLibrary` actually works...?
+
+</span>
+
+<span class="fragment">*"`AwesomeLibrary` is based on the `Promise` API"* (official docs)</span>
+
+<span class="fragment">
+
+#### But what is a `Promise`...?
+
+</span>
+
+<span class="fragment">*"Think of `Promise` as a way to write asynchronous code in JavaScript using procedural coding style"*</span>
+
+<span class="fragment">
+
+#### Need some code...?
+
+</span>
+
+<span class="fragment">
+
+```ts
+const promise = new Promise(() => {
+  // Things are happening here...
+});
+```
+
+</span>
+
+Notes :
+
+
+
+## A long time ago... 2/3
+
+```ts [1,7|2,6|3|4|5|10|11|1-11]
+const promise = new Promise<number>((resolve, reject) => {
+  setTimeout(() => {
+    Math.random() > 0.5
+      ? resolve('withSomeData')
+      : reject('forAReason');
+  }, 1000);
+});
+
+promise
+  .then((data) => console.log(data))              // output: "withSomeData"
+  .catch((err) => console.error(err));            // output: "forAReason"
+```
+
+<div class="fragment" style="margin-top: 2em; text-align: center; font-size: 1.5em">
+
+So, it wasn't that hard... 😎
+
+</div>
+
+Notes :
+
+
+
+## A long time ago... 3/3
+
+```ts
+const observable$ = new Observable(() => {
+  // Things are happening here...
+});
+```
+
+<div class="fragment" style="margin-top: 2em; text-align: center; font-size: 1.5em">
+
+Let's find out what's going on inside... 🤔
+
+</div>
+
+Notes :
+
+When i learned Angular, i had this exact same feeling...
+
+
+
 ## RxJS
 
 - Refers to a __paradigm__ called ReactiveX (http://reactivex.io/)
   - an API for asynchronous programming with observable streams
   - implemented in all major programming languages: RxJava, Rx.NET, ...
 
-- Angular uses the JavaScript implementation: *RxJS*
+- Let's focus on the JavaScript implementation: *RxJS*
 
-- Observables:
-  - represent a stream of data that can be subscribed to
-  - allowing multiple values to be emitted over time
+<br /><br />
 
 <p style="text-align: center">
-  <img src="./favicon.ico" alt="ReactiveX" height="150" />
+  <img src="./favicon.ico" alt="ReactiveX" height="200" />
 </p>
 
 Notes :
 
 
 
-## RxJS
+## In a nutshell
 
-- Observables are used everywhere in the Angular framework: *HTTP*, *Router*, ...
+- Observables:
+  - represent a stream of data that can be subscribed to
+  - allowing multiple values to be emitted over time
 
-- *State management* of an Angular application can be achieved using observables
+Notes :
 
-- Understanding observables is crucial to master the Angular framework
+
+
+## Building blocks
 
 - To understand RxJS, you need to learn the following concepts:
   - `Observable`
@@ -40,9 +136,9 @@ Everything is summarized in the slide "RxJS - Summary so far"...
 
 
 
-## Observable & Observer
+## Observable & Observer 1/4
 
-```ts [1|3-7|9-12|14]
+```ts [1|3-7|9-12|14|1-14]
 import { Observable, Observer } from 'rxjs';
 
 const data$ = new Observable<number>((subscriber) => {
@@ -73,7 +169,7 @@ Notes :
 
 
 
-## Observable & Observer
+## Observable & Observer 2/4
 
 ```ts
 import { Observable, Observer } from 'rxjs';
@@ -98,7 +194,7 @@ Notes :
 
 
 
-## Observable & Observer
+## Observable & Observer 3/4
 
 ```ts
 import { Observable, Observer } from 'rxjs';
@@ -110,20 +206,47 @@ const data$ = new Observable<number>((subscriber) => {
   subscriber.next(3);                             // <-- Value NOT emitted
 });
 
-const next = (data: number) => console.log(data); // <-- Function as observer
+const observer: Partial<Observer<number>> = {
+  next: (data: number) => console.log(data),      // <-- Listen to "next" events
+};
 
-data$.subscribe(next);                            // <-- same as `data$.subscribe({ next });`
-
-// output: 1, 2
+data$.subscribe(observer);                        // output: 1, 2
 ```
 
 - Once the observable completes (or is in error), further calls to `next` are ignored
 
-- You can use a function as observer to simply listen to "next" events
+Notes :
 
 
 
-## Subscription 1/3
+## Observable & Observer 4/4
+
+```ts
+import { Observable, Observer } from 'rxjs';
+
+const data$ = new Observable<number>((subscriber) => {
+  subscriber.next(1);
+  subscriber.next(2);
+  subscriber.complete();
+  subscriber.next(3);                             // <-- Value NOT emitted
+});
+
+
+const next = (data: number) => console.log(data); // <-- Function as observer
+
+
+data$.subscribe(next);                            // output: 1, 2
+
+// data$.subscribe({ next });                     // <-- Equivalent
+```
+
+- You can use a function as observer to simply listen to `next` events
+
+Notes :
+
+
+
+## Subscription 1/3 (not yet...)
 
 - Example of an observable that completes itself properly (without memory leak)
 
@@ -168,7 +291,7 @@ const data$ = new Observable<number>((subscriber) => {
     console.log('tick');
   }, 1000);
 
-  // ...
+
 });
 
 const subscription: Subscription = data$.subscribe((data: number) => {
@@ -220,7 +343,7 @@ Notes :
 
 
 
-## Observable source
+## Observable source 1/4
 
 - Observable can be created using `of` function:
 
@@ -232,7 +355,13 @@ const source$ = of('hello', 123);
 source$.subscribe(console.log); // output: hello, 123
 ```
 
-- Observable can be created from existing value (like Array or Promise) using `from` function:
+Notes :
+
+
+
+## Observable source 2/4
+
+- Observable can be created from existing value (like `Array` or `Promise`) using `from` function:
 
 ```ts
 import { from } from 'rxjs';
@@ -240,6 +369,11 @@ import { from } from 'rxjs';
 const fromArray$ = from(['hello', 123]);
 
 fromArray$.subscribe(console.log); // output: hello, 123
+
+```
+
+```ts
+import { from } from 'rxjs';
 
 const fromPromise$ = from(new Promise((resolve) => resolve('Done!')));
 
@@ -250,7 +384,7 @@ Notes :
 
 
 
-## Observable source
+## Observable source 3/4
 
 - Observable can be created using `fromEvent` function:
 
@@ -261,6 +395,12 @@ const fromDocumentClick$ = fromEvent(document, 'click');
 
 fromDocumentClick$.subscribe((event: Event) => console.log(event));
 ```
+
+Notes :
+
+
+
+## Observable source 4/4
 
 - Observable that emits an error event can be created using `throwError` function:
 
@@ -278,9 +418,9 @@ Notes :
 
 
 
-## Operators | synchronous
+## Operators | synchronous 1/2
 
-```ts
+```ts [1-11|13|15|17|19-22|1-22]
 import {
   Observable, filter, map // <-- "filter" and "map": synchronous transformations
 } from 'rxjs';
@@ -309,9 +449,40 @@ Notes :
 
 
 
+## Operators | synchronous 2/2
+
+
+```ts [1-11|13|16-19|15,20,21|1-21]
+import {
+  Observable, map, tap // <-- "map" and "tap": synchronous transformations
+} from 'rxjs';
+
+const data$ = new Observable<number>((subscriber) => {
+  subscriber.next(1);
+  subscriber.next(2);
+  subscriber.next(3);
+  subscriber.next(4);
+  subscriber.complete();
+});
+
+let counter = 0;                                                    // <-- Defined out of the stream
+
+data$.pipe(
+  tap((data) => {
+    counter += 1;                                                   // <-- Handle side effect
+    return 'ignored value';                                         // <-- Return value is ignored
+  }),
+  map((data) => data * 10)
+).subscribe(console.log);                                           // output: 10, 20, 30, 40
+```
+
+Notes :
+
+
+
 ## Operators | asynchronous
 
-```ts
+```ts [1-7|9,17|10-16|19|1-22]
 import { Observable, concatMap } from 'rxjs'; // <-- "concatMap": asynchronous transformation
 
 const todoId$ = new Observable<number>((subscriber) => {
@@ -588,25 +759,25 @@ Notes :
 
 
 
-## Angular state management 1/4
+## State management 1/3
 
 - Expose application data through service facade and observables
 
 ```ts
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap, map } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
 export class TodoService {
   private _todos$ = new BehaviorSubject<Todo[] | undefined>(undefined);
+
   todos$ = this._todos$.asObservable();
+
   get todosSnapshot() { return this._todos$.value; }
 
-  constructor(private httpClient: HttpClient) {}
-
   fetch(): Observable<void> {
-    return this.httpClient.get<Todo[]>('https://jsonplaceholder.typicode.com/todos').pipe(
+    return from(fetch<Todo[]>('https://jsonplaceholder.typicode.com/todos')).pipe(
       tap((todos) => {
         this._todos$.next(todos);   // <-- Using `tap` operator for "side-effects"
+
       }),
       map(() => undefined),         // <-- Force the consumer to use the `todos$` property
     );
@@ -618,23 +789,22 @@ Notes :
 
 
 
-## Angular state management 2/4
+## State management 2/3
 
 - Same example but using a `ReplaySubject` instead of a `BehaviorSubject`
 
 ```ts
-import { ReplaySubject, map, Observable, tap } from 'rxjs';
+import { ReplaySubject, Observable, tap, map } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
 export class TodoService {
   todosSnapshot?: Todo[];
+  
   private _todos$ = new ReplaySubject<Todo[]>(1); // <-- `undefined` no longer required
+  
   todos$ = this._todos$.asObservable();
 
-  constructor(private httpClient: HttpClient) {}
-
   fetch(): Observable<void> {
-    return this.httpClient.get<Todo[]>('https://jsonplaceholder.typicode.com/todos').pipe(
+    return from(fetch<Todo[]>('https://jsonplaceholder.typicode.com/todos')).pipe(
       tap((todos) => {
         this.todosSnapshot = todos;
         this._todos$.next(this.todosSnapshot);
@@ -653,131 +823,24 @@ Notes :
 
 
 
-## Angular state management 3/4
+## State management 3/3
 
 - Determine the appropriate place to trigger data fetching
 
 - Don't forget to handle errors!
 
+- Consume the data anywhere
+
 ```ts
-import { Component, OnInit } from '@angular/core';
+const todoService = new TodoService();
 
-@Component({
-  selector: 'app-root',
-  template: `<h1>My todo list</h1>
-             <app-todo-list />
-             <p *ngIf="showError">Sorry, a problem occured!</p>`
-})
-export class AppComponent implements OnInit {
-  showError = false;
+let showError = false;
 
-  constructor(private todoService: TodoService) {}
+todoService.fetch().subscribe({ error: () => (showError = true) });
 
-  ngOnInit() {
-    this.todoService.fetch().subscribe({ error: () => (this.showError = true) });
-  }
-}
+todoService.todos$.subscribe((todos) => console.log(todos));
 ```
 
 Notes :
 
 
-
-## Angular state management 4/4
-
-- Consume the service facade in your components
-
-```ts
-import { Component, OnDestroy } from '@angular/core';
-
-@Component({
-  selector: 'app-todo-list',
-  template: `
-    <p *ngFor="let todo of todos">
-      {{ todo.title }} is completed: {{ todo.completed ? 'yes' : 'no' }}.
-    </p>
-  `
-})
-export class TodoListComponent implements OnDestroy {
-  protected todos: Todo[] = [];
-
-  private subscription = this.todoService.todo$.subscribe((todos) => (this.todos = todos));
-
-  constructor(private todoService: TodoService) {}
-
-  ngDestroy() { this.subscription.unsubscribe(); }
-}
-```
-
-Notes :
-
-
-
-## Angular - Async pipe
-
-- Use the `async` pipe to consume the facade directly in your components template
-
-```ts
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-todo-list',
-  template: `
-    <p *ngFor="let todo of todos$ | async">
-      {{ todo.title }} is completed: {{ todo.completed ? 'yes' : 'no' }}.
-    </p>
-  `
-})
-export class TodoListComponent {
-  protected todos$ = this.todoService.todos$;
-
-  constructor(private todoService: TodoService) {}
-}
-```
-
-Notes :
-
-Explain that with this method, the `todos$` are "reactive".
-
-Todos displayed in the component can be refreshed...
-
-
-
-## Angular - Async pipe
-
-- Use the "`as`" syntax to create a local template variable and reduce the number of subscriptions in your components template
-
-```ts
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-todo-list',
-  template: `
-    <ng-container *ngIf="todos$ | async as todos">    
-      <h2>There's is {{ todo.length }} item(s) in your todo list.</h2>
-
-      <p *ngFor="let todo of todos">
-        {{ todo.title }} is completed: {{ todo.completed ? 'yes' : 'no' }}.
-      </p>
-    </ng-container>
-  `
-})
-export class TodoListComponent {
-  protected todos$ = this.todoService.todos$;
-
-  constructor(private todoService: TodoService) {}
-}
-```
-
-Notes :
-
-
-
-## Angular - Async pipe
-
-- The `async` pipe provides many advantages:
-  - It automatically subscribes to the `Observable`
-  - It automatically triggers change detection when new data is emitted from the `Observable`
-  - It automatically unsubscribes from the `Observable` when the component is about to get destroyed
-
-Notes :
