@@ -40,6 +40,6 @@ Reveal.initialize({
 import confetti from 'canvas-confetti';
 document.addEventListener('keyup', (keyboardEvent) => {
   if (keyboardEvent.key === 'c') {
-    confetti({ particleCount: 100, spread: 70, origin: { y: 0.65 } });
+    confetti({ particleCount: 200, spread: 365, scalar: 1.5, origin: { y: 0.4 } });
   }
 })
