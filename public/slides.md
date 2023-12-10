@@ -777,10 +777,10 @@ export class TodoService {
   dispatch(): Observable<void> {
     return from(fetch<Todo[]>('https://jsonplaceholder.typicode.com/todos')).pipe(
       tap((todos) => {
-        this._todos$.next(todos);   // <-- Using `tap` operator for "side-effects"
+        this._todos$.next(todos);               // <-- Using `tap` operator for "side-effects"
 
       }),
-      map(() => undefined),         // <-- Force the consumer to use the `todos$` property
+      map(() => undefined),                     // <-- Force the consumer to use the `todos$` property
     );
   }
 }
@@ -808,9 +808,9 @@ export class TodoService {
     return from(fetch<Todo[]>('https://jsonplaceholder.typicode.com/todos')).pipe(
       tap((todos) => {
         this.todosSnapshot = todos;
-        this._todos$.next(this.todosSnapshot);
+        this._todos$.next(this.todosSnapshot);  // <-- Using `tap` operator for "side-effects"
       }),
-      map(() => undefined),
+      map(() => undefined),                     // <-- Force the consumer to use the `todos$` property
     );
   }
 }
