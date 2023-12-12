@@ -1,9 +1,9 @@
-## The bad
+## Why I was upset?
 
 <span class="fragment">
 
 ```ts
-let itBe = new AwesomeLibrary<ManipulatingComplexData>().then((justUseMe) => {
+let discover = new AwesomeLibrary<ManipulatingComplexData>().then((justUseMe) => {
   andDontAskQuestions(justUseMe);
 });
 ```
@@ -42,11 +42,16 @@ const promise = new Promise(() => {
 
 </span>
 
+
+<div class="fragment" style="font-size: 1.5em">😠</div>
+
 Notes :
 
 
 
-## The good
+## But things could have been different...
+
+<div class="fragment">
 
 ```ts [1,7|2,6|3|4|5|10|11|1-11]
 const promise = new Promise<number>((resolve, reject) => {
@@ -62,17 +67,19 @@ promise
   .catch((err) => console.error(err));            // output: "forAReason"
 ```
 
+</div>
+
 <div class="fragment" style="margin-top: 2em; text-align: center; font-size: 1.5em">
-
-So, it wasn't that hard... 😎
-
+  So, it wasn't that hard... 😎
 </div>
 
 Notes :
 
 
 
-## On the way
+## Let's get it right from the start!
+
+<div class="fragment">
 
 ```ts
 const observable$ = new Observable(() => {
@@ -80,9 +87,11 @@ const observable$ = new Observable(() => {
 });
 ```
 
+</div>
+
 <div class="fragment" style="margin-top: 2em; text-align: center; font-size: 1.5em">
 
-Let's find out what's going on inside... 🤔
+Let's find out what's behind this comment... 🤔
 
 </div>
 
@@ -458,11 +467,11 @@ const data$ = new Observable<number>((subscriber) => {
   subscriber.complete();
 });
 
-let counter = 0;                                                    // <-- Defined out of the stream
+let oddValuesCount = 0;                                             // <-- Defined out of the stream
 
 data$.pipe(
   tap((data) => {
-    counter += 1;                                                   // <-- Handle side effect
+    if (data % 2 === 0) oddValuesCount += 1;                        // <-- Handle side effect
     return 'ignored value';                                         // <-- Return value is ignored
   }),
   map((data) => data * 10)
@@ -473,7 +482,7 @@ Notes :
 
 
 
-## Operators | asynchronous 1/3
+## Operators | asynchronous 1/4
 
 ```ts [1-7|9,17|10-16|19,21,22|1-22]
 import { Observable, concatMap } from 'rxjs'; // <-- "concatMap": asynchronous transformation
@@ -484,10 +493,10 @@ const todoId$ = new Observable<number>((subscriber) => {
   subscriber.complete();
 });
 
-const fetchTodoFactory$ = (id: number) => new Observable<Todo>((subscriber) => {
+const fetchTodoFactory$ = (id: number) => new Observable((subscriber) => {
   fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
     .then((response) => response.json())
-    .then((todo: Todo) => {
+    .then((todo) => {
       subscriber.next(todo);                  // <-- Emit "next" event
       subscriber.complete();                  // <-- Emit "complete" event
     })
@@ -508,9 +517,40 @@ Notes :
 
 - The same result can be achieved using: `from(fetch('...'))`
 
+- Explain the difference when replacing `concatMap` with `mergeMap`
 
 
-## Operators | asynchronous 2/3
+
+## Operators | asynchronous 2/4
+
+```ts [1|3-5|7,20|8|9,19|10,11,18|12-17|1-20]
+import { Observable, fromEvent, map, switchMap } from 'rxjs';
+
+const input = document.createElement('input');
+input.type = 'number';
+document.body.appendChild(input);
+
+fromEvent(input, 'input').pipe(
+  map((event) => (event.target as HTMLInputElement).value),
+  switchMap((id) => new Observable((subscriber) => {
+    const controller = new AbortController();
+    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, { signal: controller.signal })
+      .then((response) => response.json())
+      .then((todo) => {
+        subscriber.next(todo);
+        subscriber.complete();
+      })
+      .catch((err) => subscriber.error(err));
+    return () => controller.abort();
+  }))
+).subscribe(console.log);
+```
+
+Notes :
+
+
+
+## Operators | asynchronous 3/4
 
 - `concatMap`<br />
   Projects each source value to an Observable which is merged in the output Observable, in a serialized fashion waiting for each one to complete before merging the next.
@@ -527,7 +567,7 @@ Notes :
 
 
 
-## Operators | asynchronous - catchError 3/3
+## Operators | asynchronous - catchError 4/4
 
 - The `catchError` operator should:
   - return another observable
@@ -607,7 +647,7 @@ subject$.error(/* ... */);
 subject$.complete(/* ... */);
 
 // Can be converted into a simple Observable...
-const observable$ = subject$.asObservable(/* ... */);
+const observable$ = subject$.asObservable();
 
 // ...hidding the Observer interface
 observable$.next(/* ... */); // ❌ Property 'next' does not exist on type 'Observable'
@@ -848,5 +888,31 @@ todoService.todos$.pipe(map(({ length }) => length)).subscribe((length) => conso
 ```
 
 Notes :
+
+
+
+## Conclusion
+
+<div class="fragment">
+
+- Now you know the main concepts of RxJS:
+  - `Observable`
+  - `Observer`
+  - `Subscription`
+  - `Operators`
+  - `Subjects`
+
+</div><br /><div class="fragment">
+
+- But your journey has just begun
+
+</div><br /><div class="fragment">
+
+- And there's so much more to learn:
+  - `combineLatest`, `debounceTime`, `delay`, `pairwise`, `reduce`, `share`, `shareReplay`, `skip`, `skipUntil`, `skipWhile`, `startWith`, `take`, `takeUntil`, `toArray`, `withLatestFrom`, `zip`, ...
+
+</div>
+
+Notes : 
 
 
