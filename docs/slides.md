@@ -1,9 +1,9 @@
-## A long time ago... 1/3
+## Why I was upset?
 
 <span class="fragment">
 
 ```ts
-let itBe = new AwesomeLibrary<ManipulatingComplexData>().then((justUseMe) => {
+let discover = new AwesomeLibrary<ManipulatingComplexData>().then((justUseMe) => {
   andDontAskQuestions(justUseMe);
 });
 ```
@@ -42,11 +42,16 @@ const promise = new Promise(() => {
 
 </span>
 
+
+<div class="fragment" style="font-size: 1.5em">😠</div>
+
 Notes :
 
 
 
-## A long time ago... 2/3
+## But things could have been different...
+
+<div class="fragment">
 
 ```ts [1,7|2,6|3|4|5|10|11|1-11]
 const promise = new Promise<number>((resolve, reject) => {
@@ -62,17 +67,19 @@ promise
   .catch((err) => console.error(err));            // output: "forAReason"
 ```
 
+</div>
+
 <div class="fragment" style="margin-top: 2em; text-align: center; font-size: 1.5em">
-
-So, it wasn't that hard... 😎
-
+  So, it wasn't that hard... 😎
 </div>
 
 Notes :
 
 
 
-## A long time ago... 3/3
+## Let's get it right from the start!
+
+<div class="fragment">
 
 ```ts
 const observable$ = new Observable(() => {
@@ -80,9 +87,11 @@ const observable$ = new Observable(() => {
 });
 ```
 
+</div>
+
 <div class="fragment" style="margin-top: 2em; text-align: center; font-size: 1.5em">
 
-Let's find out what's going on inside... 🤔
+Let's find out what's behind this comment... 🤔
 
 </div>
 
@@ -138,7 +147,7 @@ Everything is summarized in the slide "RxJS - Summary so far"...
 
 ## Observable & Observer 1/4
 
-```ts [1|3-7|9-12|14|1-14]
+```ts [1|3,7,9,12|4,5,10|6,11|14|1-14|6,11]
 import { Observable, Observer } from 'rxjs';
 
 const data$ = new Observable<number>((subscriber) => {
@@ -171,7 +180,7 @@ Notes :
 
 ## Observable & Observer 2/4
 
-```ts
+```ts [6,11|14|1-14]
 import { Observable, Observer } from 'rxjs';
 
 const data$ = new Observable<number>((subscriber) => {
@@ -196,7 +205,7 @@ Notes :
 
 ## Observable & Observer 3/4
 
-```ts
+```ts [4-6|7|1-14|11]
 import { Observable, Observer } from 'rxjs';
 
 const data$ = new Observable<number>((subscriber) => {
@@ -207,7 +216,7 @@ const data$ = new Observable<number>((subscriber) => {
 });
 
 const observer: Partial<Observer<number>> = {
-  next: (data: number) => console.log(data),      // <-- Listen to "next" events
+  next: (data: number) => console.log(data),      // <-- Object property as "next" observer
 };
 
 data$.subscribe(observer);                        // output: 1, 2
@@ -221,7 +230,7 @@ Notes :
 
 ## Observable & Observer 4/4
 
-```ts
+```ts [11|1-14]
 import { Observable, Observer } from 'rxjs';
 
 const data$ = new Observable<number>((subscriber) => {
@@ -232,12 +241,10 @@ const data$ = new Observable<number>((subscriber) => {
 });
 
 
-const next = (data: number) => console.log(data); // <-- Function as observer
+const next = (data: number) => console.log(data); // <-- Function as "next" observer
 
 
 data$.subscribe(next);                            // output: 1, 2
-
-// data$.subscribe({ next });                     // <-- Equivalent
 ```
 
 - You can use a function as observer to simply listen to `next` events
@@ -250,7 +257,7 @@ Notes :
 
 - Example of an observable that completes itself properly (without memory leak)
 
-```ts
+```ts [1,3,14|4|6,13|7,17|9-12,18|1-19|6,10,13]
 import { Observable } from 'rxjs';
 
 const data$ = new Observable<number>((subscriber) => {
@@ -278,9 +285,9 @@ Notes :
 
 ## Subscription 2/3
 
-- Example of an observable that never completes and have a *memory leak*!
+- Example of an observable that never completes and have a *memory leak*! 😱
 
-```ts
+```ts [6,9|3,4,7,8,12|14,20|17,18|1-20|6,9,17,18]
 import { Observable, Subscription } from 'rxjs';
 
 const data$ = new Observable<number>((subscriber) => {
@@ -311,7 +318,7 @@ Notes :
 
 - Example of an observable that never completes but cleans up itself properly
 
-```ts
+```ts [6,9,11,17,18|1-20]
 import { Observable, Subscription } from 'rxjs';
 
 const data$ = new Observable<number>((subscriber) => {
@@ -363,17 +370,12 @@ Notes :
 
 - Observable can be created from existing value (like `Array` or `Promise`) using `from` function:
 
-```ts
+```ts [1|3,5|7,9|1-9]
 import { from } from 'rxjs';
 
 const fromArray$ = from(['hello', 123]);
 
 fromArray$.subscribe(console.log); // output: hello, 123
-
-```
-
-```ts
-import { from } from 'rxjs';
 
 const fromPromise$ = from(new Promise((resolve) => resolve('Done!')));
 
@@ -388,7 +390,7 @@ Notes :
 
 - Observable can be created using `fromEvent` function:
 
-```ts
+```ts [1|3,5|1-5]
 import { fromEvent } from 'rxjs';
 
 const fromDocumentClick$ = fromEvent(document, 'click');
@@ -404,7 +406,7 @@ Notes :
 
 - Observable that emits an error event can be created using `throwError` function:
 
-```ts
+```ts [1|3|5-7|1-7]
 import { throwError } from 'rxjs';
 
 const error$ = throwError(() => new Error('Oops!'));
@@ -465,11 +467,11 @@ const data$ = new Observable<number>((subscriber) => {
   subscriber.complete();
 });
 
-let counter = 0;                                                    // <-- Defined out of the stream
+let oddValuesCount = 0;                                             // <-- Defined out of the stream
 
 data$.pipe(
   tap((data) => {
-    counter += 1;                                                   // <-- Handle side effect
+    if (data % 2 === 0) oddValuesCount += 1;                        // <-- Handle side effect
     return 'ignored value';                                         // <-- Return value is ignored
   }),
   map((data) => data * 10)
@@ -480,9 +482,9 @@ Notes :
 
 
 
-## Operators | asynchronous
+## Operators | asynchronous 1/4
 
-```ts [1-7|9,17|10-16|19|1-22]
+```ts [1-7|9,17|10-16|19,21,22|1-22]
 import { Observable, concatMap } from 'rxjs'; // <-- "concatMap": asynchronous transformation
 
 const todoId$ = new Observable<number>((subscriber) => {
@@ -491,10 +493,10 @@ const todoId$ = new Observable<number>((subscriber) => {
   subscriber.complete();
 });
 
-const fetchTodoFactory$ = (id: number) => new Observable<Todo>((subscriber) => {
+const fetchTodoFactory$ = (id: number) => new Observable((subscriber) => {
   fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
     .then((response) => response.json())
-    .then((todo: Todo) => {
+    .then((todo) => {
       subscriber.next(todo);                  // <-- Emit "next" event
       subscriber.complete();                  // <-- Emit "complete" event
     })
@@ -515,9 +517,40 @@ Notes :
 
 - The same result can be achieved using: `from(fetch('...'))`
 
+- Explain the difference when replacing `concatMap` with `mergeMap`
 
 
-## Operators | more...
+
+## Operators | asynchronous 2/4
+
+```ts [1|3-5|7,20|8|9,19|10,11,18|12-17|1-20]
+import { Observable, fromEvent, map, switchMap } from 'rxjs';
+
+const input = document.createElement('input');
+input.type = 'number';
+document.body.appendChild(input);
+
+fromEvent(input, 'input').pipe(
+  map((event) => (event.target as HTMLInputElement).value),
+  switchMap((id) => new Observable((subscriber) => {
+    const controller = new AbortController();
+    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, { signal: controller.signal })
+      .then((response) => response.json())
+      .then((todo) => {
+        subscriber.next(todo);
+        subscriber.complete();
+      })
+      .catch((err) => subscriber.error(err));
+    return () => controller.abort();
+  }))
+).subscribe(console.log);
+```
+
+Notes :
+
+
+
+## Operators | asynchronous 3/4
 
 - `concatMap`<br />
   Projects each source value to an Observable which is merged in the output Observable, in a serialized fashion waiting for each one to complete before merging the next.
@@ -528,35 +561,31 @@ Notes :
 - `switchMap`<br />
   Projects each source value to an Observable which is merged in the output Observable, emitting values only from the most recently projected Observable.
 
-- `combineLatest`<br />
-  Combines multiple Observables to create an Observable whose values are calculated from the latest values of each of its input Observables.
-
-- `debouceTime`<br />
-  Emits a notification from the source Observable only after a particular time span has passed without another source emission.
+- *a lot more...*
 
 Notes :
 
 
 
-## Operators | catchError
+## Operators | asynchronous - catchError 4/4
 
 - The `catchError` operator should:
   - return another observable
   - throw again to be handled by another `catchError` or the observer's `error` handler
 
-```ts
+```ts [3,8,11|5,7,11,13|12|1-16]
 import { interval, tap, catchError, of } from 'rxjs';
 
 const source$ = interval(1000).pipe(
   tap((value) => {
     if (value > 3) throw new Error('Oops!');
   }),
-  catchError(() => of('Fallback'))
+  catchError(() => of('Fallback'))            // <-- Trigger "next" event
 );
 
 source$.subscribe({
   next: console.log,
-  error: console.error,
+  error: console.error,                       // <-- Never called
   complete: () => console.log('Done!')
 });
 
@@ -569,29 +598,41 @@ Notes :
 
 ## Summary so far
 
+<div class="fragment">
+
 - By convention, a variable representing an observable ends with the symbol `$`
+
+</div><br /><div class="fragment">
 
 - The `Observable` implementation is a function that use the `Subscriber` methods to emit the stream events
   - `.next()`, `.complete()` and `.error()`
+
+</div><br /><div class="fragment">
 
 - The `.subscribe()` method activates the observable to emit its data stream
   - It accepts an object (`Partial<Observer>`) or a function as `Observer` to listen to the stream events
   - It returns a `Subscription` allowing the consumer to `.unsubscribe()` from the activated observable
 
+</div><br /><div class="fragment">
+
 - Unsubscription is necessary to avoid memory leaks when the consumer is no longer interested in the data
   - Unless the observable is already in "complete" (or "error" state)
 
-- The `Operators` allow to transform the emitted values and make the observables very powerful
+</div><br /><div class="fragment">
+
+- The `Operators` allow to transform the emitted values and make the observables very powerful 🚀
+
+</div>
 
 Notes :
 
 
 
-## Subject
+## Subject 1/2
 
 - A `Subject` implements both `Observable` and `Observer` interfaces
 
-```ts
+```ts [1,3|5-7|9-12|14-18|1-18]
 import { Subject } from 'rxjs';
 
 const subject$ = new Subject();
@@ -606,9 +647,9 @@ subject$.error(/* ... */);
 subject$.complete(/* ... */);
 
 // Can be converted into a simple Observable...
-const observable$ = subject$.asObservable(/* ... */);
+const observable$ = subject$.asObservable();
 
-// ...hiding the Observer interface
+// ...hidding the Observer interface
 observable$.next(/* ... */); // ❌ Property 'next' does not exist on type 'Observable'
 ```
 
@@ -616,14 +657,14 @@ Notes :
 
 
 
-## Subject
+## Subject 2/2
 
 - Unlike the observable:
   - a subject implementation lives outside its instantiation (calling `next`, `error`, `complete`)
   - a subject can emit stream events even before any subscription ("*hot*" observable)
   - a subject is "*multicast*" (all subscribers share the same stream events)
 
-```ts
+```ts [1|3|5|7|9|11-13|1-14]
 const data$ = new Subject<string>();
 
 data$.next('A');                          // <-- value is lost
@@ -651,7 +692,7 @@ Notes :
   - an observable emits stream events only when subscribing ("*cold*" observable)
   - an observable is "*unicast*" (each subscriber receive a new data stream)
 
-```ts
+```ts [1,3,8|4-7|10|11|1-13]
 import { Observable } from 'rxjs';
 
 const observable$ = new Observable<string>((subscriber) => {
@@ -675,7 +716,7 @@ Notes :
 
 - As an observer, a `Subject` can subscribe to an `Observable`!
 
-```ts
+```ts [1-7|9-10|12-13|15-20]
 import { Observable, Subject } from 'rxjs';
 
 const observable$ = new Observable<string>((subscriber) => {
@@ -685,17 +726,17 @@ const observable$ = new Observable<string>((subscriber) => {
 });
 
 const subject$ = new Subject<string>();
-subject$.subscribe(console.log);          // output: A, B
+subject$.subscribe(console.log);
 
 // Doing this...
-observable$.subscribe(subject$);          // <-- `subject$` acting as `Observer`
+observable$.subscribe(subject$);                // output: A, B
 
 // ...is equivalent to
 observable$.subscribe({
   next: (observable: string) => subject$.next(observable),
   complete: () => subject$.complete(),
   error: (err: unknown) => subject$.error(err),
-});
+});                                             // output: A, B
 ```
 
 Notes :
@@ -706,7 +747,7 @@ Notes :
 
 A variant of Subject that requires an initial value and emits its current value whenever it is subscribed to.
 
-```ts
+```ts [1|3|5|7|9|11-12|14|1-18]
 import { BehaviorSubject } from 'rxjs';
 
 const data$ = new BehaviorSubject<string>('A');           // <-- Initial value
@@ -735,7 +776,7 @@ Notes :
 
 A variant of Subject that "replays" old values to new subscribers by emitting them when they first subscribe.
 
-```ts
+```ts [1|3|5|7|9|11|13-15|1-17]
 import { ReplaySubject } from 'rxjs';
 
 const data$ = new ReplaySubject<string>(2);               // <-- Number of events to replay
@@ -763,7 +804,7 @@ Notes :
 
 - Expose application data through service facade and observables
 
-```ts
+```ts [1,3,19|4-8|10-11,17-18|12-15|16|1-19]
 import { BehaviorSubject, Observable, tap, map } from 'rxjs';
 
 export class TodoService {
@@ -773,13 +814,13 @@ export class TodoService {
 
   get todosSnapshot() { return this._todos$.value; }
 
-  fetch(): Observable<void> {
+  dispatch(): Observable<void> {
     return from(fetch<Todo[]>('https://jsonplaceholder.typicode.com/todos')).pipe(
       tap((todos) => {
-        this._todos$.next(todos);   // <-- Using `tap` operator for "side-effects"
+        this._todos$.next(todos);               // <-- Using `tap` operator for "side-effects"
 
       }),
-      map(() => undefined),         // <-- Force the consumer to use the `todos$` property
+      map(() => undefined),                     // <-- Force the consumer to use the `todos$` property
     );
   }
 }
@@ -793,7 +834,7 @@ Notes :
 
 - Same example but using a `ReplaySubject` instead of a `BehaviorSubject`
 
-```ts
+```ts [1,3,19|4-8|10-11,17-18|12-15|16|1-19]
 import { ReplaySubject, Observable, tap, map } from 'rxjs';
 
 export class TodoService {
@@ -803,13 +844,13 @@ export class TodoService {
   
   todos$ = this._todos$.asObservable();
 
-  fetch(): Observable<void> {
+  dispatch(): Observable<void> {
     return from(fetch<Todo[]>('https://jsonplaceholder.typicode.com/todos')).pipe(
       tap((todos) => {
         this.todosSnapshot = todos;
-        this._todos$.next(this.todosSnapshot);
+        this._todos$.next(this.todosSnapshot);  // <-- Using `tap` operator for "side-effects"
       }),
-      map(() => undefined),
+      map(() => undefined),                     // <-- Force the consumer to use the `todos$` property
     );
   }
 }
@@ -831,16 +872,47 @@ Notes :
 
 - Consume the data anywhere
 
-```ts
+```ts [1-6|8-9|11-12|1-12]
+// app.component.ts
 const todoService = new TodoService();
 
 let showError = false;
 
-todoService.fetch().subscribe({ error: () => (showError = true) });
+todoService.dispatch().subscribe({ error: () => (showError = true) });
 
+// todo-list.component.ts
 todoService.todos$.subscribe((todos) => console.log(todos));
+
+// todo-count.component.ts
+todoService.todos$.pipe(map(({ length }) => length)).subscribe((length) => console.log(length));
 ```
 
 Notes :
+
+
+
+## Conclusion
+
+<div class="fragment">
+
+- Now you know the main concepts of RxJS:
+  - `Observable`
+  - `Observer`
+  - `Subscription`
+  - `Operators`
+  - `Subjects`
+
+</div><br /><div class="fragment">
+
+- But your journey has just begun
+
+</div><br /><div class="fragment">
+
+- And there's so much more to learn:
+  - `combineLatest`, `debounceTime`, `delay`, `pairwise`, `reduce`, `share`, `shareReplay`, `skip`, `skipUntil`, `skipWhile`, `startWith`, `take`, `takeUntil`, `toArray`, `withLatestFrom`, `zip`, ...
+
+</div>
+
+Notes : 
 
 
