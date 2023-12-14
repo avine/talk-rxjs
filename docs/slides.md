@@ -205,7 +205,7 @@ Notes :
 
 ## Observable & Observer 3/4
 
-```ts [4-6|7|1-14|11]
+```ts [4-6,11|7|1-14|11]
 import { Observable, Observer } from 'rxjs';
 
 const data$ = new Observable<number>((subscriber) => {
@@ -287,7 +287,7 @@ Notes :
 
 - Example of an observable that never completes and have a *memory leak*! 😱
 
-```ts [6,9|3,4,7,8,12|14,20|17,18|1-20|6,9,17,18]
+```ts [6,9|3,4,7,8,12|14,15,20|16-19|1-20|6,9,17,18]
 import { Observable, Subscription } from 'rxjs';
 
 const data$ = new Observable<number>((subscriber) => {
@@ -354,7 +354,7 @@ Notes :
 
 - Observable can be created using `of` function:
 
-```ts
+```ts [1|1-5]
 import { of } from 'rxjs';
 
 const source$ = of('hello', 123);
@@ -552,23 +552,6 @@ Notes :
 
 ## Operators | asynchronous 3/4
 
-- `concatMap`<br />
-  Projects each source value to an Observable which is merged in the output Observable, in a serialized fashion waiting for each one to complete before merging the next.
-
-- `mergeMap`<br />
-  Projects each source value to an Observable which is merged in the output Observable.
-
-- `switchMap`<br />
-  Projects each source value to an Observable which is merged in the output Observable, emitting values only from the most recently projected Observable.
-
-- *a lot more...*
-
-Notes :
-
-
-
-## Operators | asynchronous - catchError 4/4
-
 - The `catchError` operator should:
   - return another observable
   - throw again to be handled by another `catchError` or the observer's `error` handler
@@ -591,6 +574,23 @@ source$.subscribe({
 
 // Output => 0, 1, 2, 3, Fallback, Done!
 ```
+
+Notes :
+
+
+
+## Operators | asynchronous 4/4
+
+- `concatMap`<br />
+  Projects each source value to an Observable which is merged in the output Observable, in a serialized fashion waiting for each one to complete before merging the next.
+
+- `mergeMap`<br />
+  Projects each source value to an Observable which is merged in the output Observable.
+
+- `switchMap`<br />
+  Projects each source value to an Observable which is merged in the output Observable, emitting values only from the most recently projected Observable.
+
+- *a lot more...*
 
 Notes :
 
@@ -910,6 +910,10 @@ Notes :
 
 - And there's so much more to learn:
   - `combineLatest`, `debounceTime`, `delay`, `pairwise`, `reduce`, `share`, `shareReplay`, `skip`, `skipUntil`, `skipWhile`, `startWith`, `take`, `takeUntil`, `toArray`, `withLatestFrom`, `zip`, ...
+
+</div><br /><div class="fragment">
+
+<span style="font-size: 1.5em">😎</span> &nbsp;thank you.
 
 </div>
 
