@@ -132,11 +132,10 @@ Notes :
 ## Building blocks
 
 - To understand RxJS, you need to learn the following concepts:
-  - `Observable`
-  - `Observer`
-  - `Subscription`
-  - `Operators`
-  - `Subjects`
+  - [`Observable` and `Observer`](#/7)
+  - [`Subscription`](#/11)
+  - [`Operators`](#/18)
+  - [`Subjects`](#/25)
 
 Notes :
 
@@ -896,8 +895,7 @@ Notes :
 <div class="fragment">
 
 - Now you know the main concepts of RxJS:
-  - `Observable`
-  - `Observer`
+  - `Observable` and `Observer`
   - `Subscription`
   - `Operators`
   - `Subjects`
