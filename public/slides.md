@@ -467,11 +467,11 @@ const data$ = new Observable<number>((subscriber) => {
   subscriber.complete();
 });
 
-let oddValuesCount = 0;                                             // <-- Defined out of the stream
+let evenValuesCount = 0;                                            // <-- Defined out of the stream
 
 data$.pipe(
   tap((data) => {
-    if (data % 2 === 0) oddValuesCount += 1;                        // <-- Handle side effect
+    if (data % 2 === 0) evenValuesCount += 1;                       // <-- Handle side effect
     return 'ignored value';                                         // <-- Return value is ignored
   }),
   map((data) => data * 10)
