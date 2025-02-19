@@ -9,7 +9,7 @@ $headingColor: #df2147;
 
 // Links and actions
 $linkColor: #df2147;
-$linkColorHover: lighten($linkColor, 20%);
+$linkColorHover: color.adjust($linkColor, $lightness: 20%);
 
 // Text selection
 $selectionBackgroundColor: #df2147;

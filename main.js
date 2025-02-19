@@ -24,7 +24,7 @@ import Highlight from "reveal.js/plugin/highlight/highlight";
 import Notes from "reveal.js/plugin/notes/notes";
 import CopyCode from "./plugins/copy-code/copy-code";
 
-Reveal.initialize({
+const deck = new Reveal({
   hash: true,
   transition: "fade",
   margin: 0.06,
@@ -36,10 +36,12 @@ Reveal.initialize({
   plugins: [Markdown, Highlight, Notes, CopyCode],
 });
 
-// Trigger Confetti by pressing "c" key
+deck.initialize();
+
+// Trigger Confetti by pressing "C" key
 import confetti from 'canvas-confetti';
 document.addEventListener('keyup', (keyboardEvent) => {
-  if (keyboardEvent.key === 'c') {
+  if (keyboardEvent.key === 'C') {
     confetti({ particleCount: 200, spread: 365, scalar: 1.5, origin: { y: 0.4 } });
   }
 })

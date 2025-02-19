@@ -2,6 +2,8 @@
  * Copy/paste from: "../node_modules/reveal.js/css/theme/source/*.scss"
  */
 
+@use "sass:color";
+
 // Default mixins and settings
 @import "../node_modules/reveal.js/css/theme/template/mixins";
 @import "../node_modules/reveal.js/css/theme/template/settings";
